@@ -20,7 +20,6 @@ def multi_threaded_client(host,port):
                 data = s.recv(1024)
                 sum+=len(data)
         done += 1
-start = time.time()
 for i in range(host_start,host_end+1):
     if(i in host_except):
         continue
@@ -31,6 +30,7 @@ for i in range(host_start,host_end+1):
             num_except += 1
     N = i - host_start + 1 - num_except
     print('N = {}'.format(N))
+    start = time.time()
     for j in range(host_start,i+1):
         if(j in host_except):
             continue
