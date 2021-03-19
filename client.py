@@ -22,6 +22,8 @@ def multi_threaded_client(host,port):
         done += 1
 start = time.time()
 for i in range(host_start,host_end+1):
+    if(i in host_except):
+        continue
     num_except = 0
     done = 0
     for j in host_except:
