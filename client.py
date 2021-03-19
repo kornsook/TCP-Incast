@@ -23,12 +23,19 @@ def multi_threaded_client(host,port):
         done += 1
 start = time.time()
 for i in range(host_start,host_end+1):
-    if(i in host_except):
+    num_except = 0
+    for j in host_except:
+        if(j <= i):
+            num_except += 1
+    N = i - host_start + 1 - num_except
+    print('N = {}'.format(N))
+    for j in range(host_start,i+1):
+        if(j in host_except):
+            continue
+        host = '192.168.2.' + str(j)
+        print(host)
+        start_new_thread(multi_threaded_client,(host,PORT))
+    while(done != N):
         continue
-    host = '192.168.2.' + str(i)
-    print(host)
-    start_new_thread(multi_threaded_client,(host,PORT))
-while(done != host_end-host_start+1 - len(host_except)):
-    continue
-end = time.time()
-print(end-start)
+    end = time.time()
+    print('Latency: {}\n Goodput: {}'.format(end-start, 4*N/(end-start)))
