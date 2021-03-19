@@ -8,8 +8,9 @@ PORT = 65432        # The port used by the server
 expected_size = 200000
 done = 0
 def multi_threaded_client(host,port):
+    global done
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-        s.connect((host,PORT))
+        s.connect((host,port))
         for i in range(20):
             s.sendall(b'Hello, world')
             sum = 0
@@ -17,10 +18,9 @@ def multi_threaded_client(host,port):
                 data = s.recv(1024)
                 sum+=len(data)
         done += 1
-        connection.close()
 start = time.time()
 for host in HOST_LIST:    
-    multi_threaded_client(host,port)
+    multi_threaded_client(host,PORT)
 while(done != len(HOST_LIST)):
     continue
 end = time.time()
