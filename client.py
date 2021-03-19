@@ -14,5 +14,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         for i in range(1000):
             data = s.recv(1024)
             sum+=len(data)
+            if(sum == 200000):
+                break
     end = time.time()
     print(end-start)
