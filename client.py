@@ -40,4 +40,4 @@ for i in range(host_start,host_end+1):
         while(done != N):
             continue
     end = time.time()
-    print('Latency: {} sec\nGoodput: {} Mbps'.format(end-start, expected_size*n_packets*(10*(-6))*N/(end-start)))
+    print('Latency: {} sec\nGoodput: {} Mbps'.format(end-start, expected_size*n_packets*(10**(-6))*N/(end-start)))
