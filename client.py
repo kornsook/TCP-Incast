@@ -8,6 +8,7 @@ host_end = 19
 host_except = [5]
 PORT = 65432        # The port used by the server
 expected_size = 200000
+n_packets = 20
 done = 0
 def multi_threaded_client(host,port):
     global done
@@ -29,7 +30,7 @@ for i in range(host_start,host_end+1):
     N = i - host_start + 1 - num_except
     print('N = {}'.format(N))
     start = time.time()
-    for k in range(20):
+    for k in range(n_packets):
         done = 0
         for j in range(host_start,i+1):
             if(j in host_except):
@@ -39,4 +40,4 @@ for i in range(host_start,host_end+1):
         while(done != N):
             continue
     end = time.time()
-    print('Latency: {}\nGoodput: {}'.format(end-start, 4*N/(end-start)))
+    print('Latency: {} sec\nGoodput: {} Mbps'.format(end-start, expected_size*n_packets*(10*(-6))*N/(end-start)))
