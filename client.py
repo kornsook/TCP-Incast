@@ -4,11 +4,11 @@ import socket, time
 from _thread import *
 
 host_start = 2
-host_end = 19
+host_end = 22
 host_except = [5]
 PORT = 65432        # The port used by the server
 expected_size = 200000
-n_packets = 20
+n_packets = 5
 done = 0
 def multi_threaded_client(host,port):
     global done
@@ -40,4 +40,4 @@ for i in range(host_start,host_end+1):
         while(done != N):
             continue
     end = time.time()
-    print('Latency: {} sec\nGoodput: {} Mbps'.format(end-start, expected_size*n_packets*(10**(-6))*N/(end-start)))
+    print('Latency: {} sec\nGoodput: {} Mbps'.format(end-start, expected_size*n_packets*8*(10**(-6))*N/(end-start)))
