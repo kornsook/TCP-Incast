@@ -12,7 +12,6 @@ done = 0
 def multi_threaded_client(host,port):
     global done
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-        print(host)
         s.connect((host,port))
         for i in range(20):
             s.sendall(b'Hello, world')
@@ -24,6 +23,7 @@ def multi_threaded_client(host,port):
 start = time.time()
 for i in range(host_start,host_end+1):
     num_except = 0
+    done = 0
     for j in host_except:
         if(j <= i):
             num_except += 1
